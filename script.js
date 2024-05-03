@@ -73,7 +73,7 @@ function drawLoopedLine(x , y, radius) {
 
 function drawCurve(x1, y1, x2, y2) {
     const controlPointX = (x1 + x2) / 2;
-    const controlPointY = (y1 + y2);
+    const controlPointY = (y1 + y2)/4;
     ctx.beginPath();
     ctx.moveTo(x1, y1);
     ctx.quadraticCurveTo(controlPointX, controlPointY, x2, y2);

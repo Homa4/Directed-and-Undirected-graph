@@ -10,8 +10,8 @@ const button = document.querySelector(".buttonUndef");
 
 button.addEventListener("click", () => {
     const matrix = generateSymmetricBinaryMatrix(numOfVertex.value);
-    undefinedGraph(radius.value, numOfVertex.value, matrix); 
-    definedGraph(radius.value, numOfVertex.value, matrix); 
+    undefinedGraph(radius.value, numOfVertex.value, matrix[0]); 
+    definedGraph(radius.value, numOfVertex.value, matrix[1]); 
 });
 
 console.log(numOfVertex.value);
