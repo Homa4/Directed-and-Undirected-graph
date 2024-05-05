@@ -76,14 +76,13 @@ function drawArrow(x2, y2,angle) {
     ctx.fill();
 }
 
-function drawArrowOnCircleBorder(centerX, centerY, radius, angle) {
+function drawSelfArrow(centerX, centerY, radius, angle) {
     const funAngle = angle * Math.PI / 180;
     const arrowX = centerX + radius * Math.cos(funAngle);
     const arrowY = centerY + radius * Math.sin(funAngle)-10;
 
     ctx.save();
     ctx.translate(arrowX, arrowY);
-    ctx.rotate(0);
     ctx.beginPath();
     ctx.moveTo(0, 0);
     ctx.lineTo(5, 15);
@@ -100,7 +99,7 @@ function drawLoopedLine(x , y, radius, angle) {
     ctx.stroke(); 
     ctx.closePath();
     ctx.rotate(angle);
-    drawArrowOnCircleBorder(x, y, radius-10, angle);
+    drawSelfArrow(x, y, radius-10, angle);
 }
 
 function drawCurve(x1, y1, x2, y2, angle) {
