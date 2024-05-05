@@ -65,31 +65,45 @@ function drawGraph(numberOfVertex){
 
 function drawArrow(x2, y2,angle) {
     const arrowSize = 15;
-    const offsetX = Math.cos(angle) * 30;
-    const offsetY = Math.sin(angle) * 30;
+    const gapX = Math.cos(angle) * radius;
+    const gapY = Math.sin(angle) * radius;
     ctx.beginPath();
-    ctx.fillStyle = 'red';
-    ctx.moveTo(x2-offsetX, y2-offsetY);
-    ctx.lineTo(x2 - arrowSize * Math.cos(angle - Math.PI / 6)-offsetX, y2 - arrowSize * Math.sin(angle - Math.PI / 6)-offsetY);
-    ctx.lineTo(x2 - arrowSize * Math.cos(angle + Math.PI / 6)-offsetX, y2 - arrowSize * Math.sin(angle + Math.PI / 6)-offsetY);
+    ctx.fillStyle = 'black';
+    ctx.moveTo(x2-gapX, y2-gapY);
+    ctx.lineTo(x2 - arrowSize * Math.cos(angle - Math.PI / 6)-gapX, y2 - arrowSize * Math.sin(angle - Math.PI / 6)-gapY);
+    ctx.lineTo(x2 - arrowSize * Math.cos(angle + Math.PI / 6)-gapX, y2 - arrowSize * Math.sin(angle + Math.PI / 6)-gapY);
     ctx.closePath();
     ctx.fill();
 }
 
+function drawArrowOnCircleBorder(centerX, centerY, radius, angle) {
+    const funAngle = angle * Math.PI / 180;
+    const arrowX = centerX + radius * Math.cos(funAngle);
+    const arrowY = centerY + radius * Math.sin(funAngle)-10;
+
+    ctx.save();
+    ctx.translate(arrowX, arrowY);
+    ctx.rotate(0);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(5, 15);
+    ctx.lineTo(-5, 15);
+    ctx.closePath();
+    ctx.fillStyle = 'black';
+    ctx.fill();
+    ctx.restore();
+}
 
 function drawLoopedLine(x , y, radius, angle) {
     ctx.beginPath();
     ctx.arc(x, y, radius-10, 0, Math.PI * 2); 
     ctx.stroke(); 
-    drawArrow(x,y,angle);
     ctx.closePath();
+    ctx.rotate(angle);
+    drawArrowOnCircleBorder(x, y, radius-10, angle);
 }
 
 function drawCurve(x1, y1, x2, y2, angle) {
-    // const offsetX = Math.cos(angle) * 30;
-    // const offsetY = Math.sin(angle) * 30;
-    // const ctxX = x2-offsetX;
-    // const ctxY = y2-offsetY;
     const controlPointX = (x1 + x2) / 2;
     const controlPointY = (y1 + y2)/4;
     ctx.beginPath();
@@ -124,8 +138,6 @@ function drawGraphEdges() {
                 drawLoopedLine(arrOfVertex[j].x - (2 * radius - 10), arrOfVertex[i].y, radius, angle);
             } else if (matrix[i][j] === 1) {
                 const angle = Math.atan2(arrOfVertex[j].y - arrOfVertex[i].y, arrOfVertex[j].x - arrOfVertex[i].x);
-                const offsetX = Math.cos(angle) * 30;
-                const offsetY = Math.sin(angle) * 30;
                 drawEdgeLine(arrOfVertex[i].x, arrOfVertex[i].y, arrOfVertex[j].x, arrOfVertex[j].y, angle);
             }
         }
