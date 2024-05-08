@@ -112,7 +112,6 @@ function drawGraphEdges(matrix) {
 
 drawGraph(numberOfVertex);
 drawGraphEdges(matrix);
-console.log(arrOfVertex);
 }
 
 export default undefinedGraph;

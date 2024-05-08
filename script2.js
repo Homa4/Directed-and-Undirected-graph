@@ -148,7 +148,6 @@ function drawGraphEdges() {
 
 drawGraph(numberOfVertex);
 drawGraphEdges();
-console.log(matrix);
 console.log(arrOfVertex);
 }
 
